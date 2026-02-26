@@ -1,27 +1,26 @@
 # Pristine Learning Mobile
 
 ## Current State
-The app has a full teacher dashboard, admin panel with Users, Students, and Weekly Analytics tabs. The Weekly Analytics tab allows admins to manually fill in a form to record a weekly snapshot (total users, active sessions, total earnings, top subjects) and download snapshots as CSV. The backend stores these snapshots but relies on admin manual input.
+The app has a warm cream / sage green color scheme using OKLCH tokens. Light mode uses a warm cream background with sage green as the primary color and amber accents. Dark mode uses deep warm neutrals.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Backend function `generateWeeklySnapshot` that computes and records a live snapshot by pulling real data: total registered users from userRecords, active sessions from sessions map, total earnings summed across all wallets, and top subjects derived from session data. Stores result via weeklySnapshots.
-- Frontend "Auto-Generate Snapshot" button in WeeklyAnalyticsTab that calls this new backend function with one click, replacing the need for manual data entry.
+- A full pastel palette: soft lavender primary, pastel mint secondary, blush pink accent, butter yellow charts
 
 ### Modify
-- WeeklyAnalyticsTab: replace (or supplement) the "Record Snapshot" manual form button with an "Auto-Generate" button that calls `generateWeeklySnapshot`. Keep the manual form as a fallback option.
+- `index.css` light mode tokens: shift to pastel hues -- lavender primary, soft mint secondary, blush accent, very pale backgrounds
+- `index.css` dark mode tokens: soften to muted pastel-tinted dark backgrounds that complement the light palette
+- Gradient utility classes updated to match new pastel directions
+- Chart color tokens updated to a pastel rainbow (lavender, mint, blush, peach, sky)
 
 ### Remove
-- Nothing removed; manual entry form is kept as a fallback.
+- Sage green and warm amber as primary/accent colors
 
 ## Implementation Plan
-1. Add `generateWeeklySnapshot` to main.mo that computes live totals and records a new snapshot.
-2. Regenerate backend bindings so `generateWeeklySnapshot` appears in backend.d.ts.
-3. Add `useGenerateWeeklySnapshot` mutation hook in useQueries.ts.
-4. Update WeeklyAnalyticsTab to add an "Auto-Generate" button wired to the new hook.
+1. Update `index.css` OKLCH tokens for light and dark mode to a pastel palette
+2. Update gradient utility classes to use pastel colors
 
 ## UX Notes
-- The Auto-Generate button should show a loading spinner while in-flight.
-- On success, display a toast and refresh the snapshot list.
-- Keep the manual "Record Snapshot" button as an advanced option for override scenarios.
+- Pastels should be soft but maintain AA contrast for text on backgrounds
+- Dark mode should use muted, desaturated versions of the pastel hues so it doesn't look washed out
